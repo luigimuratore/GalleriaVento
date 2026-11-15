@@ -15,10 +15,9 @@ struct VentoState {
   bool command(const char* c, uint32_t now) {
     tick(now);
     if (!strcmp(c,"reset")) { reset(); return true; }
-    if (purging) return false;
     if (!strcmp(c,"fans_on") && !fans) { fans = true; return true; }
     if (!strcmp(c,"fans_off") && fans && !smoke && !actuation) { fans = false; return true; }
-    if (!strcmp(c,"smoke_on") && fans && !smoke) { smoke = true; heatStart = now; return true; }
+    if (!strcmp(c,"smoke_on") && fans && !smoke && !purging) { smoke = true; heatStart = now; return true; }
     if (!strcmp(c,"smoke_off") && smoke && !actuation) { startPurge(now); return true; }
     if (!strcmp(c,"actuation_on") && smoke && !actuation) { actuation = true; direction = NEUTRAL; return true; }
     if (!strcmp(c,"actuation_off") && actuation) { actuation = false; direction = NEUTRAL; return true; }

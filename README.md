@@ -8,6 +8,7 @@ Galleria del vento con ESP8266 D1 mini e dashboard web locale. Il progetto preve
 
 - [Firmware ESP8266](firmware/vento8266/vento8266.ino): Wi-Fi, server web e comandi simulati.
 - [Dashboard](dashboard/index.html): anteprima locale. Apri il file nel browser anche senza ESP.
+- [Preparazione delle prove reali](docs/prove-reali.md): pin proposti, blocchi e verifiche prima dei collegamenti.
 - [Mappa dei pin](docs/circuito-pin.svg) e [esempio carico DC](docs/circuito-dc.svg): bozze, non schemi esecutivi.
 - [Circuito spiegato](docs/circuito-chiaro.html), [componenti](docs/circuito-esp8266.md) e [lista per il sopralluogo](docs/sopralluogo.md).
 - `firmware/GalleriaVento/`: vecchia bozza ESP32. Non è il firmware installato.
@@ -79,7 +80,7 @@ La dashboard e i comandi funzionano senza Internet. I font esterni possono esser
 1. **Ventole:** accende le quattro ventole simulate.
 2. **Filetti fluidi:** avvia pompa e coil simulate. La coil ha un limite di 40 secondi.
 3. **Aerodinamica:** abilita neutro, sopra e sotto. È attiva una sola direzione alla volta.
-4. Per spegnere, segui l'ordine inverso. I filetti scompaiono subito. Lo spurgo della pompa resta simulato per 3 secondi; durante lo spurgo i comandi restano bloccati.
+4. Per spegnere, segui l'ordine inverso. I filetti scompaiono subito. Lo spurgo della pompa resta simulato per 3 secondi; durante lo spurgo puoi comandare ARIA, mentre FUMO resta bloccato fino al termine.
 
 Un reset della scheda riporta tutti gli stati simulati a spento. Il timer usa il tempo trascorso dall'accensione; NTP non è usato. L'animazione e gli stati della pagina non dimostrano il funzionamento di dispositivi reali.
 
