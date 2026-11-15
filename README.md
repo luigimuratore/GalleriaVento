@@ -9,7 +9,8 @@ Galleria del vento con ESP8266 D1 mini e dashboard web locale. Il progetto preve
 - [Firmware ESP8266](firmware/vento8266/vento8266.ino): Wi-Fi, server web e comandi simulati.
 - [Dashboard](dashboard/index.html): anteprima locale. Apri il file nel browser anche senza ESP.
 - [Preparazione delle prove reali](docs/prove-reali.md): pin proposti, blocchi e verifiche prima dei collegamenti.
-- [Mappa dei pin](docs/circuito-pin.svg) e [esempio carico DC](docs/circuito-dc.svg): bozze, non schemi esecutivi.
+- [Millefori e collegamenti](schemi/millefori-posizione.svg).
+- [Mappa dei pin](schemi/circuito-pin.svg) e [esempio carico DC](schemi/circuito-dc.svg): bozze, non schemi esecutivi.
 - [Circuito spiegato](docs/circuito-chiaro.html), [componenti](docs/circuito-esp8266.md) e [lista per il sopralluogo](docs/sopralluogo.md).
 - `firmware/GalleriaVento/`: vecchia bozza ESP32. Non è il firmware installato.
 

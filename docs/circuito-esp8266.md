@@ -1,6 +1,6 @@
 # VENTO — bozza circuito con ESP8266MOD
 
-Aggiornamento: D0 comanda i LED ON/OFF. L’ingresso di stato non è previsto per ora; D3 resta libero come possibile opzione futura da verificare per l’avvio. Vedi [mappa pin](circuito-pin.svg) ed [esempio DC](circuito-dc.svg).
+Aggiornamento: D0 comanda i LED ON/OFF. L’ingresso di stato non è previsto per ora; D3 resta libero come possibile opzione futura da verificare per l’avvio. Vedi [mappa pin](../schemi/circuito-pin.svg) ed [esempio DC](../schemi/circuito-dc.svg).
 
 Questa è una bozza funzionale. Non è uno schema di cablaggio esecutivo. Le tensioni e le correnti dei carichi non sono ancora note. Non acquistare regolatori, alimentatori o protezioni di potenza prima di verificare le targhe.
 
@@ -15,7 +15,7 @@ Questa è una bozza funzionale. Non è uno schema di cablaggio esecutivo. Le ten
 
 ## 2. Schema a blocchi
 
-[Apri lo schema grafico con i dispositivi](schema-funzionale.svg). Mostra i collegamenti funzionali. Non mostra morsetti, cavi o protezioni dettagliate.
+[Apri lo schema grafico con i dispositivi](../schemi/schema-funzionale.svg). Mostra i collegamenti funzionali. Non mostra morsetti, cavi o protezioni dettagliate.
 
 ```text
                       RETE 230 V AC
