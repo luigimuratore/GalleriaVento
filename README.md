@@ -14,6 +14,7 @@ Galleria del vento con ESP8266 D1 mini e dashboard web locale. Il progetto preve
 - [Prodotti disponibili](docs/prodotti-disponibili.md): riepilogo dei moduli e delle verifiche da fare.
 - [Millefori e collegamenti](schemi/millefori-posizione.svg).
 - [Circuito con regolazione manuale](schemi/circuito-regolazione-manuale.svg): schema funzionale con MY-9892.
+- [Schema generale ESP32](schemi/schema-generale-esp32.svg) e [note sui collegamenti](docs/schema-generale-esp32.md): linee 230 V, 12 V e 5 V.
 - [Mappa dei pin](schemi/circuito-pin.svg) e [esempio carico DC](schemi/circuito-dc.svg): bozze, non schemi esecutivi.
 - [Circuito spiegato](docs/circuito-chiaro.html), [componenti](docs/circuito-esp8266.md) e [lista per il sopralluogo](docs/sopralluogo.md).
 - `firmware/GalleriaVento/`: vecchia bozza ESP32. Non è il firmware installato.
@@ -70,7 +71,7 @@ pio device list
 pio run -e d1_mini_simulazione -t upload --upload-port /dev/cu.usbserial-PORTA
 ```
 
-Sostituisci `/dev/cu.usbserial-PORTA` con la porta trovata. Chiudi eventuali monitor seriali prima dell'upload. Il caricamento sostituisce il firmware presente sulla scheda. Gli aggiornamenti OTA via Wi-Fi non sono ancora disponibili.
+Sostituisci `/dev/cu.usbserial-PORTA` con la porta trovata. Chiudi eventuali monitor seriali prima dell'upload. Il caricamento sostituisce il firmware presente sulla scheda. Per gli aggiornamenti successivi è disponibile OTA via Wi-Fi, come descritto sotto.
 
 ### 4. Apri la dashboard
 
@@ -85,6 +86,31 @@ Se non vedi i messaggi iniziali, premi brevemente il tasto reset della scheda. L
 L'ESP crea anche la rete diretta `VENTO-SETUP`. La password è nel file locale `secrets.h`. Collegati a questa rete e apri **http://192.168.4.1/**. Se il telefono segnala che la rete non ha Internet, resta connesso. La rete diretta può cambiare canale quando l'ESP si collega a un'altra rete.
 
 La dashboard e i comandi funzionano senza Internet. I font esterni possono essere sostituiti automaticamente dai font del dispositivo. Non serve un account. Chi raggiunge la dashboard può inviare comandi simulati: usa una rete attendibile.
+
+## Aggiornare l’ESP32 via Wi-Fi (OTA)
+
+L’OTA è disponibile nella build ESP32 in simulazione. La prima installazione della versione con OTA deve avvenire via USB. Su questa scheda è già stata installata. L’OTA usa la porta **3232** e una password privata nel file locale `firmware/vento8266/ota_config.h`, escluso da Git. Non condividere il file né i binari compilati: contengono credenziali.
+
+1. Collega computer ed ESP alla stessa rete Wi-Fi.
+2. Nella cartella del progetto esegui:
+
+```sh
+python3 tools/embed_dashboard.py
+PLATFORMIO_CORE_DIR=/private/tmp/vento-platformio /Users/gigi/.platformio/penv/bin/pio run -e freenove_esp32_simulazione
+PLATFORMIO_CORE_DIR=/private/tmp/vento-platformio python3 tools/upload_ota.py
+```
+
+Il programma usa `galleriaventosafran.local`. Se il nome non viene risolto, specifica l’indirizzo IP della scheda:
+
+```sh
+PLATFORMIO_CORE_DIR=/private/tmp/vento-platformio python3 tools/upload_ota.py --host 192.168.1.105
+```
+
+L’indirizzo può cambiare. Sulla rete diretta `VENTO-SETUP` usa `--host 192.168.4.1`. Il firewall del computer deve permettere la connessione di ritorno dal dispositivo. In caso di errore usa USB. I percorsi sopra sono quelli di questo computer; su altri computer sostituisci il percorso PlatformIO e, se necessario, la cartella `PLATFORMIO_CORE_DIR`.
+
+Al momento dell’inizio di un caricamento autorizzato, gli stati simulati sono azzerati e i comandi temporaneamente bloccati. Dopo il riavvio non ripartono da soli. OTA con password non cifra il firmware: usa una rete attendibile. Non è una protezione funzionale per carichi reali.
+
+Per una nuova copia del progetto, copia `firmware/vento8266/ota_config.example.h` in `ota_config.h`, imposta una password privata di **16–64 caratteri** (lettere, numeri, `_` o `-`) e installa via USB. Per cambiare la password usa di nuovo USB. Conserva il file locale: la password deve coincidere con quella della scheda.
 
 ## Comandi simulati
 

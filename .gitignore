@@ -2,3 +2,4 @@
 firmware/vento8266/secrets.h
 firmware/vento8266/dashboard_embedded.h
 .DS_Store
+firmware/vento8266/ota_config.h

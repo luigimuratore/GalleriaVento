@@ -1,20 +1,22 @@
-# SIB — Freenove ESP32-WROOM: mappa preliminare
+# SAFRAN — Freenove ESP32-WROOM: mappa preliminare
 
-[Apri il disegno dei pin](../schemi/pin-freenove-esp32.svg).
+[Apri lo schema aggiornato della millefori e dei morsetti](../schemi/millefori-esp32-morsetti.svg). I disegni precedenti degli altri circuiti potrebbero non riflettere questa configurazione.
 
-Questa mappa è una proposta per un ESP32 classico con modulo WROOM. Occorre confrontarla con la revisione esatta della scheda Freenove prima di collegare i fili. Le etichette sono numeri **GPIO**, non i vecchi D0–D8 della D1 mini.
+Il disegno è una mappa logica: non mostra la posizione fisica dei pin. Questa mappa è una proposta per un ESP32 classico con modulo WROOM. Occorre confrontarla con la revisione esatta della scheda Freenove prima di collegare i fili. Le etichette sono numeri **GPIO**, non i vecchi D0–D8 della D1 mini.
 
 | GPIO proposto | Funzione | Collegamento previsto |
 |---|---|---|
-| 25 | ARIA | Interfaccia relè/contattore, da verificare |
-| 26 | FUMO · pompa | Ingresso driver DC, da verificare |
-| 27 | FUMO · coil | Richiesta al driver con protezioni indipendenti |
+| 25 | ARIA · ventola 1 | Scheda relè A, ingresso IN1, da verificare |
+| 23 | ARIA · ventola 2 | Scheda relè A, ingresso IN2, da verificare |
+| 21 | ARIA · ventola 3 | Scheda relè B, ingresso IN1, da verificare |
+| 22 | ARIA · ventola 4 | Scheda relè B, ingresso IN2, da verificare |
+| 26 | FUMO · pompa | TRIG/PWM del MOSFET montato sulla millefori, da verificare |
+| 27 | FUMO · coil | Comando driver montato sulla millefori, con protezioni indipendenti |
 | 32 | FLUSSI · sopra | Driver valvola normalmente chiusa |
 | 33 | FLUSSI · sotto | Driver valvola normalmente chiusa |
-| 18 | Compressore | Driver o contattore idoneo, da verificare |
-| 19 | LED | Driver striscia LED |
+| — | Compressore e LED | Gestione indipendente, nessun collegamento di controllo all’ESP32 |
 
-Le velocità sono regolate manualmente. GPIO 34–39 sono solo ingressi sull'ESP32 classico; GPIO 0, 2, 5, 12 e 15 influenzano l'avvio. Pin flash non disponibili. Consultare il [pinout Freenove](https://github.com/Freenove/Freenove_ESP32_WROOM_Board) e la [documentazione Espressif](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html).
+Le quattro uscite ventole sono previste per essere comandate insieme dalla dashboard; i singoli relè non garantiscono indipendenza dalle altre ventole. Le velocità sono regolate manualmente. GPIO 34–39 sono solo ingressi sull'ESP32 classico; GPIO 0, 2, 5, 12 e 15 influenzano l'avvio. Pin flash non disponibili. Consultare il [pinout Freenove](https://github.com/Freenove/Freenove_ESP32_WROOM_Board) e la [documentazione Espressif](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html).
 
 ## Stato del firmware
 
@@ -33,3 +35,5 @@ pio device monitor -b 115200
 Sostituisci PORTA con la porta rilevata. Le reti e la password dell'access point rimangono nel file locale ignorato da Git `firmware/vento8266/secrets.h`. Se mancante, copiare `secrets.example.h` e configurarlo. La scheda stampa l'indirizzo IP sulla seriale. L'indirizzo IP può differire da quello della vecchia scheda.
 
 Prima di un firmware con uscite reali occorre identificare driver e polarità, alimentatori, protezioni indipendenti, condizioni sicure ai reset, monitoraggio e verifica dell'avvio, arresto fisico, compatibilità del regolatore MY-9892 con i motori, flusso e protezione termica coil. L'ESP32 usa logica 3,3 V e non alimenta i carichi dai GPIO. La parte a 230 V va progettata e verificata da personale qualificato.
+
+Il disegno a 16 poli è una bozza precedente, non definitiva: si sta valutando di saldare direttamente i fili di potenza e usare un solo segnale per ciascuna scheda relè. La nuova disposizione deve ancora essere verificata. Il driver della coil è provvisorio: compatibilità e correnti non sono ancora note. LED e compressore sono esclusi dal controllo ESP.

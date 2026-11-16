@@ -16,3 +16,5 @@ I filetti scompaiono subito allo spegnimento. Il timer di 40 secondi e lo spurgo
 Test della logica senza hardware: `c++ -std=c++11 -Wall -Wextra -pedantic tests/state_test.cpp -o /tmp/vento-state-test && /tmp/vento-state-test`.
 
 `GalleriaVento/` è la vecchia bozza ESP32 e non è quella installata.
+
+Per la build ESP32, l’aggiornamento OTA autenticato è disponibile dopo la prima installazione USB. Consulta la sezione OTA nel [README principale](../README.md). La build ESP8266 non abilita OTA.

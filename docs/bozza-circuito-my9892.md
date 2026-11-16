@@ -2,6 +2,8 @@
 
 [Apri il disegno aggiornato del circuito](../schemi/circuito-regolazione-manuale.svg).
 
+[Apri lo schema ESP32, relè e contattore](../schemi/esp32-rele-contattore.svg).
+
 Questa bozza descrive le funzioni. Non è uno schema di cablaggio e non identifica ancora i morsetti di potenza. Non alimentare sulla base del disegno.
 
 ## Componenti identificati nella foto
