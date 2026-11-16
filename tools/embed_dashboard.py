@@ -1,19 +1,29 @@
 from pathlib import Path
+
 source = Path('dashboard/index.html').read_text()
+local_script = source[source.rfind('<script>'):source.rfind('</script>')]
+render = local_script[local_script.index('function render(){'):local_script.index('\nfunction purge()')]
+render = render.replace('const allowed=(i===0?', 'const allowed=online&&!busy&&(i===0?')
+render = render.replace('b.disabled=!state.smoke||state.purging', 'b.disabled=!online||busy||!state.smoke||state.purging')
+render = render.replace("state.purging?'Purging · airflow control is available.':'Interactive preview · no devices connected.'", "!online?'Connection to ESP unavailable.':state.purging?'Purging · airflow control is available.':'ESP connected · simulation, no devices connected.'")
 script = '''<script>
-let state={fans:false,smoke:false,act:false,direction:'neutral',purging:false};let online=false,busy=false;
-const keys=['fans','smoke','act'];const items=[['ARIA'],['FUMO'],['FLUSSI']];
-function render(){
- document.querySelector('#steps').innerHTML=items.map((it,i)=>{const k=keys[i],on=state[k];let allowed=on?(i===2||!state[keys[i+1]]):(i===0||state[keys[i-1]]);if((state.purging && k!=='fans')||!online||busy)allowed=false;return `<div class="step ${on?'is-on':''}"><span class="number">0${i+1}</span><div class="info"><strong>${it[0]}</strong></div><button class="toggle ${on?'active':''}" data-index="${i}" ${allowed?'':'disabled'} aria-pressed="${on}" aria-label="${on?'Spegni':'Accendi'} ${it[0]}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v10M6.4 5.8a8 8 0 1 0 11.2 0"/></svg></button></div>`}).join('');
- document.querySelector('#progress').textContent=String(keys.filter(k=>state[k]).length).padStart(2,'0')+' / 03 ATTIVI';
- document.querySelector('.visual').classList.toggle('directed-active',state.act&&state.direction!=='neutral');document.querySelector('#airLines').classList.toggle('on',state.fans);document.querySelector('#smoke').classList.toggle('on',state.smoke);document.querySelector('#upper').classList.toggle('on',state.act&&state.direction==='upper');document.querySelector('#lower').classList.toggle('on',state.act&&state.direction==='lower');
- document.querySelector('#directionLabel').textContent=({upper:'SOPRA',lower:'SOTTO',neutral:'NEUTRO'})[state.direction];document.querySelectorAll('[data-dir]').forEach(b=>{b.disabled=!online||busy||!state.act;b.classList.toggle('selected',b.dataset.dir===state.direction);b.setAttribute('aria-pressed',String(b.dataset.dir===state.direction))});
- document.querySelector('#notice').textContent=!online?'Connessione alla scheda assente.':state.purging?'Spurgo simulato · puoi comandare ARIA.':'ESP connesso · simulazione, nessun carico collegato.';
+let state={fans:false,smoke:false,act:false,direction:'neutral',purging:false};
+let online=false,busy=false,revision=0;
+''' + render + '''
+async function sync(){
+ if(busy)return;const current=revision;
+ try{const res=await fetch('/api/status',{cache:'no-store'});if(!res.ok)throw Error();const next=await res.json();if(current!==revision||busy)return;state=next;online=true}
+ catch(e){if(current!==revision||busy)return;online=false}render();
 }
-async function sync(){if(busy)return;try{const res=await fetch('/api/status',{cache:'no-store'});if(!res.ok)throw 0;state=await res.json();online=true}catch(e){online=false}render()}
-async function command(c){if(busy||!online)return;busy=true;render();try{const res=await fetch('/api/command',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({command:c})});state=await res.json();online=true}catch(e){online=false}finally{busy=false;render()}}
-document.querySelector('#steps').addEventListener('click',e=>{const b=e.target.closest('[data-index]');if(!b||b.disabled)return;const i=+b.dataset.index,k=keys[i];command(['fans','smoke','actuation'][i]+(state[k]?'_off':'_on'))});
-document.querySelectorAll('[data-dir]').forEach(b=>b.addEventListener('click',()=>command(b.dataset.dir)));document.querySelector('#reset').onclick=()=>command('reset');sync();setInterval(sync,1000);
+async function send(c){const res=await fetch('/api/command',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({command:c})});if(!res.ok)throw Error('Command rejected');state=await res.json()}
+async function action(commands){
+ if(busy||!online)return;busy=true;revision++;render();
+ try{for(const c of commands)await send(c)}catch(e){try{const r=await fetch('/api/status',{cache:'no-store'});if(!r.ok)throw Error();state=await r.json()}catch(_){online=false}}
+ finally{busy=false;render()}
+}
+document.querySelector('#steps').addEventListener('click',e=>{const b=e.target.closest('[data-key]');if(!b||b.disabled)return;const key=b.dataset.key;action([key+(state[key]?'_off':'_on')])});
+document.querySelectorAll('[data-dir]').forEach(b=>b.addEventListener('click',()=>{if(b.disabled)return;const dir=b.dataset.dir;if(state.act&&state.direction===dir)action(['actuation_off']);else action(state.act?[dir]:['actuation_on',dir])}));
+document.querySelector('#reset').onclick=()=>action(['reset']);sync();setInterval(sync,1000);
 </script>'''
 source = source[:source.rfind('<script>')] + script + '</body></html>\n'
 assert ')VENTOHTML"' not in source
