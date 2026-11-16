@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#20232c">
+<title>VENTO — Galleria del vento</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+:root{color-scheme:dark;--ink:#eff3ed;--muted:#95a29a;--line:#293831;--accent:#c5f993}*{box-sizing:border-box}body{margin:0;background:#0b1110;color:var(--ink);font-family:'DM Sans',sans-serif}main{max-width:530px;margin:auto;padding:28px 23px 48px}header{display:flex;align-items:center;justify-content:space-between}.brand{font:700 19px 'Space Grotesk',sans-serif;letter-spacing:.23em}.mark{color:var(--accent)}.status{font-size:10px;letter-spacing:.13em;color:#a6b4aa;border:1px solid #34443a;border-radius:30px;padding:9px 11px}.dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:7px}.hero{padding:54px 0 20px}.eyebrow{font-size:10px;letter-spacing:.2em;color:var(--accent);font-weight:700}.hero h1{font:500 clamp(19px,6.1vw,31px)/1.1 'Space Grotesk',sans-serif;letter-spacing:-.045em;white-space:nowrap;margin:14px 0}.visual{height:160px;margin:20px 0 28px;position:relative;overflow:hidden;border-block:1px solid var(--line);background:radial-gradient(ellipse at 50% 52%,#1a3025 0,transparent 70%)}.visual svg{width:100%;height:100%}.air-lines{opacity:.08;transition:opacity .4s}.air-lines.on{opacity:.9}.visual.directed-active .air-lines.on{opacity:.16}.visual.directed-active .smoke.on{opacity:.24}.air-lines path{stroke-dasharray:9 12;animation:airFlow 4s linear infinite}.smoke{opacity:0}.smoke.on{opacity:1}.smoke path{stroke-dasharray:7 11;animation:detailFlow 2s linear infinite}.smoke path:nth-child(2){animation-delay:-.6s}.directed{opacity:0;transition:opacity .35s}.directed.on{opacity:1}.directed path{stroke-dasharray:10 8;animation:detailFlow 2s linear infinite}@keyframes airFlow{to{stroke-dashoffset:-84}}@keyframes detailFlow{to{stroke-dashoffset:-72}}.section{display:flex;justify-content:space-between;align-items:center;margin:0 0 13px;font-size:10px;letter-spacing:.17em;color:var(--muted);font-weight:700}.section span:last-child{color:#c6d4ca}.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.step{display:flex;flex-direction:column;align-items:stretch;gap:12px;background:#131b19;border:1px solid #26312e;border-radius:13px;padding:13px 10px;min-height:170px;transition:border-color .2s,background .2s}.step.is-on{border-color:#a7e77b;background:#314d2e;box-shadow:inset 0 0 28px #a3e9771a}.number{color:#6c7d75;font:500 11px 'Space Grotesk',sans-serif;align-self:center;text-align:center}.info{flex:1;min-width:0;display:flex;align-items:center;justify-content:center;text-align:center}.info strong{display:block;font-size:clamp(15px,5vw,23px);font-weight:700;line-height:1.15;letter-spacing:-.03em;white-space:nowrap}.info small{display:block;color:var(--muted);font-size:11px;margin-top:6px;line-height:1.35;overflow-wrap:anywhere}.toggle{display:flex;align-items:center;justify-content:center;gap:4px;border:1px solid #485b4c;background:transparent;color:#d5e1d4;border-radius:9px;min-width:0;min-height:46px;padding:0 4px;font:700 10px 'DM Sans',sans-serif;cursor:pointer}.toggle svg{width:20px;height:20px;display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}.toggle.active{background:var(--accent);border-color:var(--accent);color:#15200f}.toggle:disabled{opacity:.33;cursor:not-allowed}.panel{margin-top:12px;border:1px solid var(--line);border-radius:16px;padding:18px;background:#101915}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13px}.panel p{font-size:11px;color:var(--muted);line-height:1.5;margin:8px 0 15px}.direction{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:#0b120e;border:1px solid #26362b;padding:5px;border-radius:12px}.direction button{border:1px solid transparent;background:transparent;color:#a6b8aa;border-radius:8px;min-height:46px;padding:8px 3px;font:700 11px 'DM Sans',sans-serif;cursor:pointer}.direction button.selected{background:#c5f993;color:#14200f}.direction button:disabled{opacity:.32;cursor:not-allowed}.notice{font-size:11px;color:#a8b6a9;min-height:32px;line-height:1.5;margin-top:15px}.foot{margin-top:20px;display:flex;justify-content:space-between;color:#708079;font-size:10px;letter-spacing:.08em}.reset{background:none;border:0;color:#a5b5a7;font-size:10px;text-decoration:underline;cursor:pointer;min-height:40px;padding:0 4px}.toggle:focus-visible,.direction button:focus-visible,.reset:focus-visible{outline:2px solid #fff;outline-offset:3px}@media(prefers-reduced-motion:reduce){.air-lines path,.smoke path,.directed path{animation:none}}
+
+/* Palette SIB: grigio, blu e bianco. */
+:root{color-scheme:dark;--ink:#fff;--muted:#c8ccd5;--line:rgba(255,255,255,.14);--accent:#fff}
+body{background:radial-gradient(ellipse 90% 38% at 50% 18%,rgba(1,68,145,.22),transparent 70%),linear-gradient(165deg,#1d222c 0%,#252a35 52%,#1d2029 100%);color:var(--ink);min-height:100vh}
+.brand{color:#fff}.status{color:#e0e2e8;border-color:rgba(255,255,255,.24);background:rgba(82,86,104,.32)}.dot{background:#fff}
+.hero h1{color:#fff}.mark,.eyebrow{color:#fff}
+.visual{border:0;border-block:1px solid rgba(175,201,231,.15);border-radius:0;background:radial-gradient(ellipse 55% 48% at 53% 50%,rgba(62,120,184,.32) 0%,rgba(1,68,145,.14) 38%,rgba(1,68,145,.04) 66%,transparent 100%);box-shadow:none}
+.section{color:#c8ccd5}.section span:last-child{color:#c8ccd5}
+.step{background:linear-gradient(145deg,rgba(82,86,104,.36),rgba(43,48,60,.74));border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 10px 24px rgba(0,0,0,.09)}
+.step.is-on{background:radial-gradient(ellipse at 50% 20%,rgba(101,166,235,.27),transparent 70%),linear-gradient(150deg,#12559d,#014491 62%,#02356e);border-color:rgba(140,190,243,.58);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 8px 26px rgba(1,68,145,.3);color:#fff}
+.number{color:#c8ccd5}.step.is-on .number{color:rgba(255,255,255,.75)}
+.toggle{border-color:rgba(255,255,255,.34);color:#fff;background:rgba(255,255,255,.05)}
+.toggle.active{background:#fff;border-color:#fff;color:#014491}
+.panel{background:linear-gradient(145deg,rgba(82,86,104,.3),rgba(42,47,59,.7));border-color:rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}
+.panel p{color:#c8ccd5}.direction{background:rgba(20,25,34,.6);border-color:rgba(255,255,255,.12)}
+.direction button{color:#d4d7e0}.direction button.selected{background:linear-gradient(145deg,#1a5ca5,#014491);color:#fff;box-shadow:0 3px 12px rgba(1,68,145,.25)}
+.notice,.foot,.reset{color:#c8ccd5}.toggle:focus-visible,.direction button:focus-visible,.reset:focus-visible{outline-color:#fff}
+
+</style></head>
+<body><main>
+<header><div class="brand">💨 SIB</div><div class="status"><span class="dot"></span> MODALITÀ DEMO</div></header>
+<section class="hero"><h1>Rendi visibile l’invisibile<span class="mark">.</span></h1></section>
+<div class="visual" aria-hidden="true"><svg viewBox="0 0 500 160" fill="none">
+<g class="air-lines" id="airLines" stroke="#79b8ff" stroke-width="1.2">
+<path d="M520 30 C460 30 405 31 365 28 C315 20 263 20 218 29 C178 37 151 58 116 68 C78 78 32 77 -20 77"/>
+<path d="M520 57 C460 57 414 57 376 53 C334 44 279 40 223 46 C185 50 164 70 141 81 C108 96 58 96 -20 96"/>
+<path d="M520 89 C467 89 419 91 377 95 C337 98 296 106 258 113 C218 121 181 121 145 117 C100 112 47 113 -20 113"/>
+<path d="M520 119 C464 119 420 122 378 125 C327 130 287 137 245 141 C196 146 155 141 115 136 C71 132 29 132 -20 132"/>
+</g>
+<g class="smoke" id="smoke" stroke="#ffffff" stroke-width="2" stroke-linecap="round">
+<path d="M520 66 C463 66 412 66 376 62 C337 52 282 49 225 54 C190 57 169 78 146 88 C115 102 61 104 -10 104"/>
+<path d="M520 80 C460 80 412 82 380 86 C338 90 298 98 257 106 C216 114 182 115 145 110 C101 105 54 106 -10 107"/>
+<path d="M520 105 C464 105 420 107 380 111 C333 116 293 125 252 129 C208 134 170 131 130 125 C86 121 45 122 -10 122"/>
+</g>
+<g class="directed" id="upper" stroke="#79b8ff" stroke-width="2.5" stroke-linecap="round"><path d="M510 49 C455 49 408 50 373 45 C333 36 279 33 225 38 C184 42 159 62 133 74 C105 87 73 88 39 88"/><path d="M510 58 C455 58 409 59 375 55 C335 46 280 43 224 49 C188 53 166 72 143 83 C112 97 78 98 40 98"/></g>
+<g class="directed" id="lower" stroke="#79b8ff" stroke-width="2.5" stroke-linecap="round"><path d="M510 94 C454 94 413 97 377 100 C337 104 296 113 257 120 C216 128 181 128 145 123 C112 118 77 118 40 118"/><path d="M510 103 C455 103 413 106 379 109 C337 113 296 122 256 129 C214 136 180 135 145 131 C111 127 77 127 40 127"/></g>
+<defs><linearGradient id="wingSurface" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cbd1dc"/></linearGradient></defs>
+<!-- Vista prospettica indicativa ispirata al modello fornito. -->
+<path d="M137 100 L177 96 L219 60 C259 57 309 56 340 62 C360 66 371 72 374 78 C336 79 300 85 268 92 C230 100 207 105 184 103 L137 102 Z" fill="url(#wingSurface)" stroke="#ffffff" stroke-width=".7"/>
+<path d="M137 102 L184 103 C207 105 230 100 268 92 C300 85 336 79 374 78 L371 81 C337 82 300 89 268 95 C230 103 206 108 183 106 L137 104 Z" fill="#525668" opacity=".8"/>
+<path d="M158 99 C169 95 179 95 190 98" stroke="#525668" stroke-width=".8" fill="none"/>
+</svg></div>
+<div class="section"><span>COMANDI</span><span id="progress">00 / 03 ATTIVI</span></div><div class="steps" id="steps"></div>
+<div class="panel"><div class="panel-head"><strong>Direzione del flusso</strong><span class="eyebrow" id="directionLabel">NEUTRO</span></div><p>Seleziona dove dirigere l’aria sull’ala.</p><div class="direction" role="group" aria-label="Direzione del flusso"><button data-dir="upper">↑ &nbsp;SOPRA</button><button data-dir="neutral">● &nbsp;NEUTRO</button><button data-dir="lower">↓ &nbsp;SOTTO</button></div></div>
+<div class="notice" id="notice" role="status"></div><div class="foot"><button class="reset" id="reset">Reset demo</button></div>
+</main><script>
+// Demo locale: nessun collegamento ai dispositivi.
+let state={fans:false,smoke:false,act:false,direction:'neutral',purging:false,heatTimer:null,purgeTimer:null};
+const items=[['ARIA'],['FUMO'],['FLUSSI']];
+const keys=['fans','smoke','act'];
+function render(){
+ document.querySelector('#steps').innerHTML=items.map((it,i)=>{const k=keys[i],on=state[k];let allowed=on?(i===2||!state[keys[i+1]]):(i===0||state[keys[i-1]]);if(state.purging && k!=='fans')allowed=false;return `<div class="step ${on?'is-on':''}"><span class="number">0${i+1}</span><div class="info"><strong>${it[0]}</strong></div><button class="toggle ${on?'active':''}" data-index="${i}" ${allowed?'':'disabled'} aria-pressed="${on}" aria-label="${on?'Spegni':'Accendi'} ${it[0]}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v10M6.4 5.8a8 8 0 1 0 11.2 0"/></svg></button></div>`}).join('');
+ document.querySelector('#progress').textContent=String(keys.filter(k=>state[k]).length).padStart(2,'0')+' / 03 ATTIVI';
+ document.querySelector('.visual').classList.toggle('directed-active',state.act&&state.direction!=='neutral');document.querySelector('#airLines').classList.toggle('on',state.fans);document.querySelector('#smoke').classList.toggle('on',state.smoke);document.querySelector('#upper').classList.toggle('on',state.act&&state.direction==='upper');document.querySelector('#lower').classList.toggle('on',state.act&&state.direction==='lower');
+ document.querySelector('#directionLabel').textContent=({upper:'SOPRA',lower:'SOTTO',neutral:'NEUTRO'})[state.direction];document.querySelectorAll('[data-dir]').forEach(b=>{b.disabled=!state.act;b.classList.toggle('selected',b.dataset.dir===state.direction);b.setAttribute('aria-pressed',String(b.dataset.dir===state.direction))});
+ document.querySelector('#notice').textContent=state.purging?'Spurgo in corso · puoi comandare ARIA.':'Anteprima interattiva · nessun dispositivo collegato.';
+}
+function purge(){state.purging=true;render();state.purgeTimer=setTimeout(()=>{state.purging=false;state.purgeTimer=null;render()},3000)}
+document.querySelector('#steps').addEventListener('click',e=>{const b=e.target.closest('[data-index]');if(!b||b.disabled)return;const k=keys[+b.dataset.index];state[k]=!state[k];if(k==='act'&&!state.act)state.direction='neutral';if(k==='smoke'){clearTimeout(state.heatTimer);if(state.smoke){state.heatTimer=setTimeout(()=>{state.smoke=false;state.act=false;state.direction='neutral';purge()},40000)}else purge()}render()});
+document.querySelectorAll('[data-dir]').forEach(b=>b.addEventListener('click',()=>{if(!state.act)return;state.direction=b.dataset.dir;render()}));
+document.querySelector('#reset').onclick=()=>{clearTimeout(state.heatTimer);clearTimeout(state.purgeTimer);state={fans:false,smoke:false,act:false,direction:'neutral',purging:false,heatTimer:null,purgeTimer:null};render()};render();
+</script></body></html>

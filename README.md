@@ -7,7 +7,9 @@ Galleria del vento con ESP8266 D1 mini e dashboard web locale. Il progetto preve
 ## Progetti e documenti
 
 - [Firmware ESP8266](firmware/vento8266/vento8266.ino): Wi-Fi, server web e comandi simulati.
-- [Dashboard](dashboard/index.html): anteprima locale. Apri il file nel browser anche senza ESP.
+- [Dashboard predefinita](dashboard/index.html): tema PaletteAziendale, apribile nel browser anche senza ESP.
+- [PaletteAziendale](dashboard/PaletteAziendale.html): copia nominata del tema attuale.
+- [Dashboard v1](dashboard/v1.html): versione precedente, conservata come anteprima indipendente.
 - [Preparazione delle prove reali](docs/prove-reali.md): pin proposti, blocchi e verifiche prima dei collegamenti.
 - [Millefori e collegamenti](schemi/millefori-posizione.svg).
 - [Mappa dei pin](schemi/circuito-pin.svg) e [esempio carico DC](schemi/circuito-dc.svg): bozze, non schemi esecutivi.
@@ -43,6 +45,8 @@ Esegui questo comando dopo ogni modifica a `dashboard/index.html` o a `tools/emb
 ```sh
 python3 tools/embed_dashboard.py
 ```
+
+La dashboard predefinita usata dal firmware è `dashboard/index.html`. Quando modifichi il tema PaletteAziendale, aggiorna anche `dashboard/PaletteAziendale.html` se vuoi mantenerne la copia nominata sincronizzata.
 
 Il comando genera `firmware/vento8266/dashboard_embedded.h`. Il file è escluso da Git. La dashboard viene caricata insieme al firmware: non serve caricare un filesystem separato.
 
