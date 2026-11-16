@@ -5,7 +5,7 @@ local_script = source[source.rfind('<script>'):source.rfind('</script>')]
 render = local_script[local_script.index('function render(){'):local_script.index('\nfunction purge()')]
 render = render.replace('const allowed=(i===0?', 'const allowed=online&&!busy&&(i===0?')
 render = render.replace('b.disabled=!state.smoke||state.purging', 'b.disabled=!online||busy||!state.smoke||state.purging')
-render = render.replace("state.purging?'Purging · airflow control is available.':'Interactive preview · no devices connected.'", "!online?'Connection to ESP unavailable.':state.purging?'Purging · airflow control is available.':'ESP connected · simulation, no devices connected.'")
+render = render.replace("state.purging?'Purging · airflow control is available.':''", "!online?'Connection to ESP unavailable.':state.purging?'Purging · airflow control is available.':''")
 script = '''<script>
 let state={fans:false,smoke:false,act:false,direction:'neutral',purging:false};
 let online=false,busy=false,revision=0;
@@ -22,8 +22,8 @@ async function action(commands){
  finally{busy=false;render()}
 }
 document.querySelector('#steps').addEventListener('click',e=>{const b=e.target.closest('[data-key]');if(!b||b.disabled)return;const key=b.dataset.key;action([key+(state[key]?'_off':'_on')])});
-document.querySelectorAll('[data-dir]').forEach(b=>b.addEventListener('click',()=>{if(b.disabled)return;const dir=b.dataset.dir;if(state.act&&state.direction===dir)action(['actuation_off']);else action(state.act?[dir]:['actuation_on',dir])}));
-document.querySelector('#reset').onclick=()=>action(['reset']);sync();setInterval(sync,1000);
+document.querySelectorAll('[data-dir]').forEach(b=>b.addEventListener('click',()=>{if(b.disabled)return;const upper=state.act&&(state.direction==='upper'||state.direction==='both'),lower=state.act&&(state.direction==='lower'||state.direction==='both');const u=b.dataset.dir==='upper'?!upper:upper,l=b.dataset.dir==='lower'?!lower:lower;const next=u?(l?'both':'upper'):(l?'lower':'neutral');if(next==='neutral')action(['actuation_off']);else action(state.act?[next]:['actuation_on',next])}));
+sync();setInterval(sync,1000);
 </script>'''
 source = source[:source.rfind('<script>')] + script + '</body></html>\n'
 assert ')VENTOHTML"' not in source

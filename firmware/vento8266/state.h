@@ -3,7 +3,7 @@
 #include <string.h>
 struct VentoState {
   bool fans = false, smoke = false, actuation = false, purging = false;
-  enum Direction { NEUTRAL, UPPER, LOWER } direction = NEUTRAL;
+  enum Direction { NEUTRAL, UPPER, LOWER, BOTH } direction = NEUTRAL;
   uint32_t heatStart = 0, purgeStart = 0;
   static constexpr uint32_t HEAT_MS = 40000, PURGE_MS = 3000;
   void reset() { fans = smoke = actuation = purging = false; direction = NEUTRAL; }
@@ -23,6 +23,7 @@ struct VentoState {
     if (!strcmp(c,"actuation_off") && actuation) { actuation = false; direction = NEUTRAL; return true; }
     if (actuation && !strcmp(c,"upper")) { direction = UPPER; return true; }
     if (actuation && !strcmp(c,"lower")) { direction = LOWER; return true; }
+    if (actuation && !strcmp(c,"both")) { direction = BOTH; return true; }
     if (actuation && !strcmp(c,"neutral")) { direction = NEUTRAL; return true; }
     return false;
   }

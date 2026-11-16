@@ -12,6 +12,8 @@ int main() {
   p = makeOutputPlan(s, false); assert(p.compressor && !p.upper && !p.lower);
   assert(s.command("upper", 3));
   p = makeOutputPlan(s, false); assert(p.upper && !p.lower && !p.heater);
+  assert(s.command("both", 4));
+  p = makeOutputPlan(s, false); assert(p.upper && p.lower);
   assert(s.command("lower", 4));
   p = makeOutputPlan(s, false); assert(!p.upper && p.lower);
   assert(s.command("actuation_off", 5));

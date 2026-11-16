@@ -52,7 +52,7 @@ void updateWifi() {
 }
 void sendStatus(int status = 200) {
   state.tick(millis());
-  const char* direction = state.direction == VentoState::UPPER ? "upper" : state.direction == VentoState::LOWER ? "lower" : "neutral";
+  const char* direction = state.direction == VentoState::UPPER ? "upper" : state.direction == VentoState::LOWER ? "lower" : state.direction == VentoState::BOTH ? "both" : "neutral";
   String body = "{\"fans\":" + String(state.fans ? "true" : "false") + ",\"smoke\":" + (state.smoke ? "true" : "false") + ",\"act\":" + (state.actuation ? "true" : "false") + ",\"purging\":" + (state.purging ? "true" : "false") + ",\"direction\":\"" + direction + "\",\"simulation\":true}";
   server.sendHeader("Cache-Control", "no-store");
   server.send(status, "application/json", body);

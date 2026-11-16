@@ -30,15 +30,40 @@ body{background:radial-gradient(ellipse 90% 38% at 50% 18%,rgba(1,68,145,.22),tr
 
 .steps{grid-template-columns:repeat(2,minmax(0,1fr))}.step{min-height:150px}.fan-assembly{opacity:0;transition:opacity .4s}.fan-assembly.on{opacity:1}.fan-assembly.on .fan-blades{transform-box:fill-box;transform-origin:center;animation:fanSpin 1.1s linear infinite}@keyframes fanSpin{to{transform:rotate(360deg)}}
 .smoke-upper,.smoke-lower{opacity:0}.visual.show-upper .smoke-upper,.visual.show-lower .smoke-lower{opacity:1}.visual.directed-active .smoke.on{opacity:1}
-.actuation-panel{margin-top:12px;padding:18px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:linear-gradient(145deg,rgba(82,86,104,.3),rgba(42,47,59,.7))}.actuation-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.actuation-head strong{display:block;font-size:15px;margin-top:7px}.actuation-kicker{font-size:9px;letter-spacing:.16em;color:#c8ccd5}.actuation-head #flowState{font-size:10px;letter-spacing:.12em;color:#d6e5fa;font-weight:700}.actuation-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:15px}.actuation-controls button{min-height:48px;border-radius:9px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.12);color:#fff;font:700 12px 'DM Sans',sans-serif;cursor:pointer}.actuation-controls button.selected{background:#fff;border-color:#fff;color:#014491}.actuation-controls button:disabled{opacity:.3;cursor:not-allowed}.actuation-panel p{margin:10px 0 0;color:#c8ccd5;font-size:11px;line-height:1.4}.actuation-controls button:focus-visible{outline:2px solid white;outline-offset:2px}@media(prefers-reduced-motion:reduce){.fan-assembly.on .fan-blades{animation:none}}
+.actuation-panel{margin-top:16px;padding:24px;border:1px solid rgba(123,177,235,.5);border-radius:14px;background:linear-gradient(145deg,rgba(34,79,130,.55),rgba(42,47,59,.88))}.actuation-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.actuation-head strong{display:block;font-size:20px;margin-top:7px}.actuation-kicker{font-size:9px;letter-spacing:.16em;color:#c8ccd5}.actuation-head #flowState{font-size:10px;letter-spacing:.12em;color:#d6e5fa;font-weight:700}.actuation-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:15px}.actuation-controls button{min-height:86px;border-radius:11px;border:1px solid rgba(190,219,255,.65);background:rgba(72,133,204,.28);color:#fff;font:700 20px 'DM Sans',sans-serif;cursor:pointer}.actuation-controls button.selected{background:#fff;border-color:#fff;color:#014491}.actuation-controls button:disabled{opacity:.48;cursor:not-allowed}.actuation-panel:not(.is-available){background:linear-gradient(145deg,rgba(34,79,130,.14),rgba(42,47,59,.35));border-color:rgba(180,201,225,.16)}.actuation-panel.is-on{border-color:rgba(140,190,243,.8);box-shadow:0 0 0 1px rgba(100,169,242,.26),0 8px 28px rgba(1,68,145,.3);background:linear-gradient(145deg,rgba(23,84,150,.48),rgba(37,46,65,.85))}.actuation-panel p{margin:10px 0 0;color:#c8ccd5;font-size:11px;line-height:1.4}.actuation-controls button:focus-visible{outline:2px solid white;outline-offset:2px}@media(prefers-reduced-motion:reduce){.fan-assembly.on .fan-blades{animation:none}}
+
+/* Keep the controls visible on phones while preserving large touch targets. */
+@media (max-width: 600px){
+ main{padding:18px 20px 20px}
+ .hero{padding:28px 0 8px}
+ .hero h1{margin:8px 0}
+ .visual{height:250px;margin:12px 0 16px}
+ .section{margin-bottom:9px}
+ .step{min-height:125px;gap:8px;padding:10px}
+ .actuation-panel{margin-top:10px;padding:17px}
+ .actuation-head strong{margin-top:4px}
+ .actuation-controls{margin-top:10px}
+ .actuation-controls button{min-height:78px}
+ .actuation-panel p{margin-top:7px}
+ .notice{margin-top:8px;min-height:17px}
+ .foot{margin-top:3px}
+}
+@media (max-width: 600px) and (max-height: 700px){
+ main{padding-top:12px;padding-bottom:12px}
+ .hero{padding-top:16px}
+ .visual{height:195px;margin:8px 0 12px}
+ .step{min-height:105px}
+ .actuation-panel{padding:13px}
+ .actuation-controls button{min-height:68px}
+}
 </style></head>
 <body><main>
 <header><div class="brand"><svg class="brand-wing" viewBox="120 45 270 80" aria-hidden="true" focusable="false"><path d="M137 100 L177 96 L219 60 C259 57 309 56 340 62 C360 66 371 72 374 78 C336 79 300 85 268 92 C230 100 207 105 184 103 L137 102 Z" fill="currentColor"/></svg> SAFRAN</div><div class="status"><span class="dot"></span> DEMO MODE</div></header>
 <section class="hero"><h1>Make the invisible visible<span class="mark">.</span></h1></section>
-<div class="visual" aria-hidden="true"><svg viewBox="0 0 500 160" fill="none">
-<g class="fan-assembly" id="fansVisual" fill="none" stroke="#b8d7ff" stroke-width="1.2"><g class="fan" transform="translate(52 22)"><circle r="13"/><g class="fan-blades" fill="#b8d7ff" stroke="none"><path d="M0 0 C-5 -8 -2 -12 1 -10 C4 -8 4 -4 0 0Z"/><path d="M0 0 C9 -3 12 0 10 3 C8 6 4 5 0 0Z"/><path d="M0 0 C-3 9 -7 10 -9 7 C-11 4 -7 1 0 0Z"/></g><circle r="1.8" fill="#fff"/></g><g class="fan" transform="translate(448 22)"><circle r="13"/><g class="fan-blades" fill="#b8d7ff" stroke="none"><path d="M0 0 C-5 -8 -2 -12 1 -10 C4 -8 4 -4 0 0Z"/><path d="M0 0 C9 -3 12 0 10 3 C8 6 4 5 0 0Z"/><path d="M0 0 C-3 9 -7 10 -9 7 C-11 4 -7 1 0 0Z"/></g><circle r="1.8" fill="#fff"/></g></g>
+<div class="visual" aria-hidden="true"><svg viewBox="0 -3 500 163" fill="none">
+<g class="fan-assembly" id="fansVisual" fill="none" stroke="#b8d7ff" stroke-width="1.2"><g class="fan" transform="translate(32 16) scale(1.22)"><circle r="13"/><g class="fan-blades" fill="#b8d7ff" stroke="none"><path d="M0 0 C-5 -8 -2 -12 1 -10 C4 -8 4 -4 0 0Z"/><path d="M0 0 C9 -3 12 0 10 3 C8 6 4 5 0 0Z"/><path d="M0 0 C-3 9 -7 10 -9 7 C-11 4 -7 1 0 0Z"/></g><circle r="1.8" fill="#fff"/></g><g class="fan" transform="translate(468 16) scale(1.22)"><circle r="13"/><g class="fan-blades" fill="#b8d7ff" stroke="none"><path d="M0 0 C-5 -8 -2 -12 1 -10 C4 -8 4 -4 0 0Z"/><path d="M0 0 C9 -3 12 0 10 3 C8 6 4 5 0 0Z"/><path d="M0 0 C-3 9 -7 10 -9 7 C-11 4 -7 1 0 0Z"/></g><circle r="1.8" fill="#fff"/></g></g>
 <g class="air-lines" id="airLines" stroke="#79b8ff" stroke-width="1.2">
-<path d="M520 30 C460 30 405 31 365 28 C315 20 263 20 218 29 C178 37 151 58 116 68 C78 78 32 77 -20 77"/>
+<path d="M520 46 C460 46 405 38 365 28 C315 20 263 20 218 29 C178 37 151 58 116 68 C78 78 32 77 -20 77"/>
 <path d="M520 57 C460 57 414 57 376 53 C334 44 279 40 223 46 C185 50 164 70 141 81 C108 96 58 96 -20 96"/>
 <path d="M520 89 C467 89 419 91 377 95 C337 98 296 106 258 113 C218 121 181 121 145 117 C100 112 47 113 -20 113"/>
 <path d="M520 119 C464 119 420 122 378 125 C327 130 287 137 245 141 C196 146 155 141 115 136 C71 132 29 132 -20 132"/>
@@ -57,7 +82,7 @@ body{background:radial-gradient(ellipse 90% 38% at 50% 18%,rgba(1,68,145,.22),tr
 <path d="M158 99 C169 95 179 95 190 98" stroke="#525668" stroke-width=".8" fill="none"/>
 </svg></div>
 <div class="section"><span>CONTROLS</span><span id="progress">00 / 02 ACTIVE</span></div><div class="steps" id="steps"></div>
-<div class="actuation-panel" id="actuationPanel"><div class="actuation-head"><div><span class="actuation-kicker">03 / AERODYNAMICS</span><strong>Flow direction</strong></div><span id="flowState">NEUTRAL</span></div><div class="actuation-controls" role="group" aria-label="Flow direction"><button data-dir="upper" aria-label="Upper flow">↑ &nbsp; UPPER</button><button data-dir="lower" aria-label="Lower flow">↓ &nbsp; LOWER</button></div><p id="flowHint">Turn on flow lines to select a direction.</p></div><div class="notice" id="notice" role="status"></div><div class="foot"><button class="reset" id="reset">Reset demo</button></div>
+<div class="actuation-panel" id="actuationPanel"><div class="actuation-head"><div><span class="actuation-kicker">03 / AERODYNAMICS</span><strong>Flow direction</strong></div><span id="flowState">NEUTRAL</span></div><div class="actuation-controls" role="group" aria-label="Flow direction"><button data-dir="upper" aria-label="Upper flow">↑ &nbsp; UPPER</button><button data-dir="lower" aria-label="Lower flow">↓ &nbsp; LOWER</button></div></div><div class="notice" id="notice" role="status"></div>
 </main><script>
 // Local preview: no devices are controlled.
 let state={fans:false,smoke:false,act:false,direction:'neutral',purging:false,heatTimer:null,purgeTimer:null};
@@ -65,13 +90,13 @@ function render(){
  const items=[['AIRFLOW','fans'],['FLOW LINES','smoke']];
  document.querySelector('#steps').innerHTML=items.map(([label,key],i)=>{const on=state[key];const allowed=(i===0?(!on||!state.smoke):state.fans&&!state.act)&&(!state.purging||i===0);return `<div class="step ${on?'is-on':''}"><span class="number">0${i+1}</span><div class="info"><strong>${label}</strong></div><button class="toggle ${on?'active':''}" data-key="${key}" ${allowed?'':'disabled'} aria-pressed="${on}" aria-label="${on?'Turn off':'Turn on'} ${label}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v10M6.4 5.8a8 8 0 1 0 11.2 0"/></svg></button></div>`}).join('');
  document.querySelector('#progress').textContent=String(Number(state.fans)+Number(state.smoke)).padStart(2,'0')+' / 02 ACTIVE';
- const visual=document.querySelector('.visual');visual.classList.toggle('show-upper',state.act&&state.direction==='upper');visual.classList.toggle('show-lower',state.act&&state.direction==='lower');visual.classList.toggle('directed-active',state.act);
+ const visual=document.querySelector('.visual');visual.classList.toggle('show-upper',state.act&&(state.direction==='upper'||state.direction==='both'));visual.classList.toggle('show-lower',state.act&&(state.direction==='lower'||state.direction==='both'));visual.classList.toggle('directed-active',state.act);
  document.querySelector('#fansVisual').classList.toggle('on',state.fans);document.querySelector('#airLines').classList.toggle('on',state.smoke);document.querySelector('#smoke').classList.toggle('on',state.smoke&&state.act);
- document.querySelector('#flowState').textContent=state.act?state.direction.toUpperCase():'NEUTRAL';document.querySelector('#flowHint').textContent=state.smoke?(state.act?'Tap the selected direction again for neutral.':'Select upper or lower flow.'):'Turn on flow lines to select a direction.';document.querySelectorAll('[data-dir]').forEach(b=>{b.disabled=!state.smoke||state.purging;b.classList.toggle('selected',state.act&&b.dataset.dir===state.direction);b.setAttribute('aria-pressed',String(state.act&&b.dataset.dir===state.direction))});
- document.querySelector('#notice').textContent=state.purging?'Purging · airflow control is available.':'Interactive preview · no devices connected.';
+ document.querySelector('#actuationPanel').classList.toggle('is-on',state.act&&state.direction!=='neutral');document.querySelector('#flowState').textContent=state.act?state.direction.toUpperCase():'NEUTRAL';document.querySelector('#actuationPanel').classList.toggle('is-available',state.smoke&&!state.purging);document.querySelectorAll('[data-dir]').forEach(b=>{b.disabled=!state.smoke||state.purging;b.classList.toggle('selected',state.act&&(b.dataset.dir===state.direction||state.direction==='both'));b.setAttribute('aria-pressed',String(state.act&&(b.dataset.dir===state.direction||state.direction==='both')))});
+ document.querySelector('#notice').textContent=state.purging?'Purging · airflow control is available.':'';
 }
 function purge(){state.purging=true;render();state.purgeTimer=setTimeout(()=>{state.purging=false;render()},3000)}
 document.querySelector('#steps').addEventListener('click',e=>{const b=e.target.closest('[data-key]');if(!b||b.disabled)return;const k=b.dataset.key;state[k]=!state[k];if(k==='smoke'){clearTimeout(state.heatTimer);if(state.smoke)state.heatTimer=setTimeout(()=>{state.smoke=false;state.act=false;state.direction='neutral';purge()},40000);else purge()}render()});
-document.querySelectorAll('[data-dir]').forEach(b=>b.addEventListener('click',()=>{if(b.disabled)return;state.direction=state.act&&state.direction===b.dataset.dir?'neutral':b.dataset.dir;state.act=state.direction!=='neutral';render()}));
-document.querySelector('#reset').onclick=()=>{clearTimeout(state.heatTimer);clearTimeout(state.purgeTimer);state={fans:false,smoke:false,act:false,direction:'neutral',purging:false,heatTimer:null,purgeTimer:null};render()};render();
+document.querySelectorAll('[data-dir]').forEach(b=>b.addEventListener('click',()=>{if(b.disabled)return;const upper=state.act&&(state.direction==='upper'||state.direction==='both'),lower=state.act&&(state.direction==='lower'||state.direction==='both');const u=b.dataset.dir==='upper'?!upper:upper,l=b.dataset.dir==='lower'?!lower:lower;state.direction=u?(l?'both':'upper'):(l?'lower':'neutral');state.act=u||l;render()}));
+render();
 </script></body></html>

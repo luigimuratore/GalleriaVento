@@ -20,8 +20,8 @@ inline OutputPlan makeOutputPlan(const VentoState &s, bool ledRequested) {
   // Non esiste ancora la lettura dei consensi di flusso e temperatura.
   p.heater = false;
   p.compressor = s.actuation;
-  p.upper = s.actuation && s.direction == VentoState::UPPER;
-  p.lower = s.actuation && s.direction == VentoState::LOWER;
+  p.upper = s.actuation && (s.direction == VentoState::UPPER || s.direction == VentoState::BOTH);
+  p.lower = s.actuation && (s.direction == VentoState::LOWER || s.direction == VentoState::BOTH);
   p.led = ledRequested;
   return p;
 }
