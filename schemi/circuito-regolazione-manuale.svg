@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1340" role="img" aria-labelledby="title desc">
+<title id="title">Galleria del vento — bozza circuito a regolazione manuale</title><desc id="desc">Schema funzionale con collegamenti proposti della D1 mini a relè, driver MOSFET, generatore di nebbia e valvole. Le velocità delle ventole e della pompa sono regolate manualmente. Morsetti, alimentazioni e sicurezze richiedono verifica.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="context-stroke"/></marker><style>
+text{font-family:Arial,Helvetica,sans-serif}.bg{fill:#101925}.top{fill:#aecbf0;font-size:15px;letter-spacing:2px;font-weight:700}.title{fill:#fff;font-size:32px;font-weight:700}.sub{fill:#c5d0de;font-size:18px}.label{fill:#fff;font-size:20px;font-weight:700}.small{fill:#c7d2df;font-size:16px}.note{fill:#ffdda8;font-size:16px}.pin{fill:#a5d2ff;font-size:19px;font-weight:700}.board{fill:#173047;stroke:#5484ad;stroke-width:2}.red{fill:#482b32;stroke:#d57e84;stroke-width:2}.blue{fill:#153851;stroke:#6ca6c9;stroke-width:2}.load{fill:#28333e;stroke:#748d9b;stroke-width:2}.safe{fill:#443729;stroke:#d9ae6e;stroke-width:2}.purple{fill:#2a344a;stroke:#879bb9;stroke-width:2}.signal{fill:none;stroke:#80c5ff;stroke-width:3}.power{fill:none;stroke:#f0b86e;stroke-width:4}.security{fill:none;stroke:#ff9b89;stroke-width:3;stroke-dasharray:8 7}.dash{fill:none;stroke:#a3b2c4;stroke-width:2;stroke-dasharray:5 5}
+</style></defs><rect width="1500" height="1340" rx="22" class="bg"/>
+<text x="50" y="52" class="top">SIB / GALLERIA DEL VENTO</text><text x="50" y="96" class="title">Comandi ESP e regolazioni manuali</text><text x="50" y="130" class="sub">Schema funzionale preliminare · le linee non identificano ancora i morsetti effettivi</text>
+<!-- controller -->
+<rect x="50" y="190" width="240" height="710" rx="20" class="board"/><text x="75" y="232" class="label">D1 mini</text><text x="75" y="258" class="small">ESP8266 · 3,3 V</text><text x="75" y="298" class="small">Pin proposti:</text>
+<g class="pin"><text x="75" y="360">D1</text><text x="75" y="445">D2</text><text x="75" y="530">D5</text><text x="75" y="615">D6</text><text x="75" y="700">D7</text><text x="75" y="785">D8</text><text x="75" y="870">D0</text></g>
+<!-- wires signal -->
+<g class="signal" marker-end="url(#arrow)"><path d="M270 353H365"/><path d="M270 438H365"/><path d="M270 523H365"/><path d="M270 608H365"/><path d="M270 693H365"/><path d="M270 778H365"/><path d="M270 863H365"/></g>
+<!-- drivers -->
+<rect x="365" y="320" width="330" height="65" rx="11" class="red"/><text x="382" y="347" class="label">RELÈ ROSSO · canale 1</text><text x="382" y="370" class="small">Livelli e polarità da verificare</text>
+<rect x="365" y="405" width="330" height="65" rx="11" class="blue"/><text x="382" y="432" class="label">MOSFET BLU · pompa</text><text x="382" y="455" class="small">Morsetti da identificare</text>
+<rect x="365" y="490" width="330" height="65" rx="11" class="safe"/><text x="382" y="517" class="label">DRIVER COIL</text><text x="382" y="540" class="small">Da scegliere e proteggere</text>
+<rect x="365" y="575" width="330" height="65" rx="11" class="blue"/><text x="382" y="602" class="label">DRIVER · valvola sopra</text><text x="382" y="625" class="small">Compatibilità bobina da verificare</text>
+<rect x="365" y="660" width="330" height="65" rx="11" class="blue"/><text x="382" y="687" class="label">DRIVER · valvola sotto</text><text x="382" y="710" class="small">Compatibilità bobina da verificare</text>
+<rect x="365" y="745" width="330" height="65" rx="11" class="purple"/><text x="382" y="772" class="label">DRIVER COMPRESSORE</text><text x="382" y="795" class="small">D8: attenzione livello al boot</text>
+<rect x="365" y="830" width="330" height="65" rx="11" class="blue"/><text x="382" y="857" class="label">MOSFET BLU · LED</text><text x="382" y="880" class="small">Morsetti da identificare</text>
+<!-- loads -->
+<rect x="845" y="315" width="600" height="75" rx="11" class="load"/><text x="865" y="345" class="label">Consenso contattore motori</text><text x="865" y="371" class="small">Relè → interfaccia idonea → contattore da dimensionare</text>
+<rect x="845" y="400" width="600" height="75" rx="11" class="load"/><text x="865" y="430" class="label">Pompa aria per i filetti</text><text x="865" y="456" class="small">Eventuale regolatore manuale DC: modello da scegliere</text>
+<rect x="845" y="485" width="600" height="75" rx="11" class="safe"/><text x="865" y="515" class="label">Atomizzatore / coil</text><text x="865" y="541" class="small">Alimentazione, corrente e protezioni da definire</text>
+<rect x="845" y="570" width="600" height="75" rx="11" class="load"/><text x="865" y="600" class="label">Elettrovalvola sopra · normalmente chiusa</text><text x="865" y="626" class="small">Tensione bobina e protezione da verificare</text>
+<rect x="845" y="655" width="600" height="75" rx="11" class="load"/><text x="865" y="685" class="label">Elettrovalvola sotto · normalmente chiusa</text><text x="865" y="711" class="small">Tensione bobina e protezione da verificare</text>
+<rect x="845" y="740" width="600" height="75" rx="11" class="load"/><text x="865" y="770" class="label">Compressore</text><text x="865" y="796" class="small">Tensione, corrente e comando da identificare</text>
+<rect x="845" y="825" width="600" height="75" rx="11" class="load"/><text x="865" y="855" class="label">Striscia LED</text><text x="865" y="881" class="small">Alimentatore e driver adatti alla striscia</text>
+<g class="signal" marker-end="url(#arrow)"><path d="M695 352H835"/><path d="M695 437H835"/><path d="M695 522H835"/><path d="M695 607H835"/><path d="M695 692H835"/><path d="M695 777H835"/><path d="M695 862H835"/></g>
+<!-- mains chain separate -->
+<text x="50" y="960" class="top">PERCORSO DI POTENZA VENTOLE · 230 V</text>
+<rect x="50" y="982" width="220" height="85" rx="12" class="safe"/><text x="68" y="1016" class="label">Rete e protezioni</text><text x="68" y="1042" class="small">Sezionamento e PE</text>
+<rect x="330" y="982" width="240" height="85" rx="12" class="safe"/><text x="348" y="1016" class="label">Contattore</text><text x="348" y="1042" class="small">Idoneo a 4 motori</text>
+<rect x="630" y="982" width="300" height="85" rx="12" class="safe"/><text x="648" y="1016" class="label">MY-9892 + manopola</text><text x="648" y="1042" class="small">Solo se motori compatibili</text>
+<rect x="990" y="982" width="245" height="85" rx="12" class="load"/><text x="1008" y="1016" class="label">Quattro ventole</text><text x="1008" y="1042" class="small">Velocità regolata a mano</text>
+<g class="power" marker-end="url(#arrow)"><path d="M270 1024H320"/><path d="M570 1024H620"/><path d="M930 1024H980"/></g>
+<!-- safety -->
+<rect x="50" y="1100" width="1395" height="125" rx="14" class="safe"/><text x="70" y="1133" class="label">Arresto e consensi indipendenti dall'ESP</text><text x="70" y="1163" class="small">Arresto fisico e protezioni interrompono le energie pericolose. Coil: consenso di flusso + protezione termica indipendenti.</text><text x="70" y="1193" class="small">Alimentatori, fusibili, terra, interblocco delle valvole, riferimento GND e livelli logici vanno definiti sui componenti reali.</text>
+<text x="50" y="1260" class="note">La manopola MY-9892 può essere a tensione di rete: non collegarla ai GPIO o alla massa dell'ESP.</text>
+<text x="50" y="1288" class="small">Le schede blu non sono ancora identificate morsetto per morsetto. Il relè 5 V non è automaticamente compatibile con 3,3 V.</text>
+<text x="50" y="1316" class="small">La parte a 230 V e le protezioni devono essere progettate e verificate da personale qualificato.</text>
+</svg>

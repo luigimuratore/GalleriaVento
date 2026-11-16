@@ -11,10 +11,16 @@ Galleria del vento con ESP8266 D1 mini e dashboard web locale. Il progetto preve
 - [PaletteAziendale](dashboard/PaletteAziendale.html): copia nominata del tema attuale.
 - [Dashboard v1](dashboard/v1.html): versione precedente, conservata come anteprima indipendente.
 - [Preparazione delle prove reali](docs/prove-reali.md): pin proposti, blocchi e verifiche prima dei collegamenti.
+- [Prodotti disponibili](docs/prodotti-disponibili.md): riepilogo dei moduli e delle verifiche da fare.
 - [Millefori e collegamenti](schemi/millefori-posizione.svg).
+- [Circuito con regolazione manuale](schemi/circuito-regolazione-manuale.svg): schema funzionale con MY-9892.
 - [Mappa dei pin](schemi/circuito-pin.svg) e [esempio carico DC](schemi/circuito-dc.svg): bozze, non schemi esecutivi.
 - [Circuito spiegato](docs/circuito-chiaro.html), [componenti](docs/circuito-esp8266.md) e [lista per il sopralluogo](docs/sopralluogo.md).
 - `firmware/GalleriaVento/`: vecchia bozza ESP32. Non è il firmware installato.
+
+## Freenove ESP32-WROOM
+
+La nuova [mappa pin e guida ESP32](docs/mappa-pin-esp32.md) descrive la build `freenove_esp32_simulazione`. Rimane una simulazione senza uscite reali. Le istruzioni qui sotto descrivono anche la precedente D1 mini ESP8266.
 
 ## Caricare e accedere
 
@@ -74,7 +80,7 @@ Apri il monitor seriale:
 pio device monitor -b 115200
 ```
 
-Se non vedi i messaggi iniziali, premi brevemente il tasto reset della scheda. L'ESP prova in sequenza le reti configurate. Quando si collega, la seriale mostra l'indirizzo da aprire nel browser. Il telefono deve essere sulla stessa rete. L'indirizzo può cambiare dopo un riavvio o una riconnessione.
+Se non vedi i messaggi iniziali, premi brevemente il tasto reset della scheda. L'ESP prova in sequenza le reti configurate. Quando si collega, la seriale mostra l'indirizzo da aprire nel browser. Il telefono deve essere sulla stessa rete. Prova anche **http://galleriaventosafran.local/**; se il nome non viene risolto, usa l’indirizzo IP indicato sulla seriale, che può cambiare.
 
 L'ESP crea anche la rete diretta `VENTO-SETUP`. La password è nel file locale `secrets.h`. Collegati a questa rete e apri **http://192.168.4.1/**. Se il telefono segnala che la rete non ha Internet, resta connesso. La rete diretta può cambiare canale quando l'ESP si collega a un'altra rete.
 
