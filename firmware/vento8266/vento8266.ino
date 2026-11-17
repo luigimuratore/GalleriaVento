@@ -18,7 +18,25 @@ using VentoWebServer = ESP8266WebServer;
 #include "state.h"
 #include "dashboard_embedded.h"
 
-// SIMULAZIONE: nessun GPIO e nessun carico reale viene comandato.
+// Solo la build esplicita VENTO_ENABLE_FAN_RELAYS comanda relè fisici.
+#if defined(VENTO_ENABLE_FAN_RELAYS) && !defined(ESP32)
+#error La prova relè è prevista solo per ESP32
+#endif
+#if defined(VENTO_ENABLE_FAN_RELAYS)
+constexpr uint8_t FAN_RELAY_1 = 22, FAN_RELAY_2 = 23;
+void setupFanRelays() {
+  // Precarica LOW prima di configurare le uscite; non controlla la fase di reset hardware.
+  digitalWrite(FAN_RELAY_1, LOW); digitalWrite(FAN_RELAY_2, LOW);
+  pinMode(FAN_RELAY_1, OUTPUT); pinMode(FAN_RELAY_2, OUTPUT);
+}
+void updateFanRelays(bool on) {
+  digitalWrite(FAN_RELAY_1, on ? HIGH : LOW);
+  digitalWrite(FAN_RELAY_2, on ? HIGH : LOW);
+}
+#else
+void setupFanRelays() {}
+void updateFanRelays(bool) {}
+#endif
 VentoWebServer server(80);
 VentoState state;
 const size_t networkCount = sizeof(NETWORKS) / sizeof(NETWORKS[0]);
@@ -54,10 +72,16 @@ void sendStatus(int status = 200) {
   state.tick(millis());
   const char* direction = state.direction == VentoState::UPPER ? "upper" : state.direction == VentoState::LOWER ? "lower" : state.direction == VentoState::BOTH ? "both" : "neutral";
   String body = "{\"fans\":" + String(state.fans ? "true" : "false") + ",\"smoke\":" + (state.smoke ? "true" : "false") + ",\"act\":" + (state.actuation ? "true" : "false") + ",\"purging\":" + (state.purging ? "true" : "false") + ",\"direction\":\"" + direction + "\",\"simulation\":true}";
+#if defined(VENTO_ENABLE_FAN_RELAYS)
+  body.remove(body.length() - 1); body += ",\"fansPhysical\":true}";
+#else
+  body.remove(body.length() - 1); body += ",\"fansPhysical\":false}";
+#endif
   server.sendHeader("Cache-Control", "no-store");
   server.send(status, "application/json", body);
 }
 void setup() {
+  setupFanRelays();
   Serial.begin(115200);
   WiFi.persistent(false); WiFi.mode(WIFI_AP_STA); WiFi.setAutoReconnect(false);
   if (WiFi.softAP(AP_SSID, AP_PASSWORD)) { Serial.print("Rete di emergenza: "); Serial.print(AP_SSID); Serial.print(" http://"); Serial.println(WiFi.softAPIP()); }
@@ -68,8 +92,8 @@ void setup() {
     ArduinoOTA.setPort(3232);
     ArduinoOTA.setPassword(OTA_PASSWORD);
     ArduinoOTA.setMdnsEnabled(false); // mDNS della dashboard è gestito separatamente.
-    ArduinoOTA.onStart([](){ state.reset(); otaUpdating = true; Serial.println("OTA iniziato: simulazione azzerata."); });
-    ArduinoOTA.onError([](ota_error_t){ state.reset(); otaUpdating = false; Serial.println("OTA non completato: simulazione azzerata."); });
+    ArduinoOTA.onStart([](){ state.reset(); updateFanRelays(false); otaUpdating = true; Serial.println("OTA iniziato: simulazione azzerata."); });
+    ArduinoOTA.onError([](ota_error_t){ state.reset(); updateFanRelays(false); otaUpdating = false; Serial.println("OTA non completato: simulazione azzerata."); });
     ArduinoOTA.begin();
     Serial.println("OTA protetto attivo sulla porta 3232.");
   } else Serial.println("OTA disabilitato: configurare una password privata valida.");
@@ -81,16 +105,20 @@ void setup() {
 #if defined(ESP32)
     if (otaUpdating) { server.send(503, "text/plain", "Aggiornamento in corso"); return; }
 #endif
-    if (!server.hasArg("command")) { sendStatus(400); return; } bool ok = state.command(server.arg("command").c_str(), millis()); sendStatus(ok ? 200 : 409); });
+    if (!server.hasArg("command")) { sendStatus(400); return; } bool ok = state.command(server.arg("command").c_str(), millis()); updateFanRelays(state.fans); sendStatus(ok ? 200 : 409); });
   server.onNotFound([](){ server.send(404, "text/plain", "Non trovato"); });
   server.begin();
-  Serial.println("VENTO: modalita simulazione, nessuna uscita hardware attiva.");
+#if defined(VENTO_ENABLE_FAN_RELAYS)
+  Serial.println("VENTO: relè ventole fisici GPIO 22/23; pompa, coil e valvole simulati.");
+#else
+  Serial.println("VENTO: simulazione, nessuna uscita hardware attiva.");
+#endif
 }
 void loop() {
 #if defined(ESP32)
   ArduinoOTA.handle();
 #endif
-  server.handleClient(); state.tick(millis()); updateWifi();
+  server.handleClient(); state.tick(millis()); updateFanRelays(state.fans); updateWifi();
 #if defined(ESP8266)
   if (mdnsStarted) MDNS.update();
 #endif
