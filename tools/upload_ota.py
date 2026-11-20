@@ -9,7 +9,8 @@ import subprocess
 import sys
 
 parser = argparse.ArgumentParser(description='Carica sull’ESP32 un firmware già compilato.')
-parser.add_argument('--host', default='galleriaventosafran.local', help='Nome locale o IP della scheda')
+parser.add_argument('--host', default='bench.local', help='Nome locale o IP della scheda')
+parser.add_argument('--environment', choices=['freenove_esp32_simulazione', 'freenove_esp32_ventole', 'freenove_esp32_valvole', 'freenove_esp32_sequenza_banco'], default='freenove_esp32_simulazione', help='Build ESP32 già compilata da caricare')
 args = parser.parse_args()
 root = Path(__file__).resolve().parent.parent
 config = root / 'firmware/vento8266/ota_config.h'
@@ -23,7 +24,7 @@ if not match or match.group(1) == 'SOSTITUISCI_CON_PASSWORD_PRIVATA':
 password = match.group(1)
 core = Path(os.environ.get('PLATFORMIO_CORE_DIR', str(Path.home() / '.platformio')))
 espota = core / 'packages/framework-arduinoespressif32/tools/espota.py'
-image = root / '.pio/build/freenove_esp32_simulazione/firmware.bin'
+image = root / '.pio/build' / args.environment / 'firmware.bin'
 if not espota.is_file() or not image.is_file():
     sys.exit('Manca il programma OTA o il firmware compilato. Compila prima con PlatformIO.')
 try:

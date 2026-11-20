@@ -81,7 +81,7 @@ Apri il monitor seriale:
 pio device monitor -b 115200
 ```
 
-Se non vedi i messaggi iniziali, premi brevemente il tasto reset della scheda. L'ESP prova in sequenza le reti configurate. Quando si collega, la seriale mostra l'indirizzo da aprire nel browser. Il telefono deve essere sulla stessa rete. Prova anche **http://galleriaventosafran.local/**; se il nome non viene risolto, usa l’indirizzo IP indicato sulla seriale, che può cambiare.
+Se non vedi i messaggi iniziali, premi brevemente il tasto reset della scheda. L'ESP prova in sequenza le reti configurate. Quando si collega, la seriale mostra l'indirizzo da aprire nel browser. Il telefono deve essere sulla stessa rete. Prova anche **http://bench.local/**; se il nome non viene risolto, usa l’indirizzo IP indicato sulla seriale, che può cambiare.
 
 L'ESP crea anche la rete diretta `VENTO-SETUP`. La password è nel file locale `secrets.h`. Collegati a questa rete e apri **http://192.168.4.1/**. Se il telefono segnala che la rete non ha Internet, resta connesso. La rete diretta può cambiare canale quando l'ESP si collega a un'altra rete.
 
@@ -100,7 +100,7 @@ PLATFORMIO_CORE_DIR=/private/tmp/vento-platformio /Users/gigi/.platformio/penv/b
 PLATFORMIO_CORE_DIR=/private/tmp/vento-platformio python3 tools/upload_ota.py
 ```
 
-Il programma usa `galleriaventosafran.local`. Se il nome non viene risolto, specifica l’indirizzo IP della scheda:
+Il programma usa `bench.local`. Se il nome non viene risolto, specifica l’indirizzo IP della scheda:
 
 ```sh
 PLATFORMIO_CORE_DIR=/private/tmp/vento-platformio python3 tools/upload_ota.py --host 192.168.1.105

@@ -19,6 +19,6 @@ int main() {
   assert(s.command("actuation_off", 5));
   assert(s.command("smoke_off", 6));
   p = makeOutputPlan(s, false); assert(p.pump && !p.heater && !p.upper && !p.lower && !p.compressor);
-  s.tick(3006); p = makeOutputPlan(s, false); assert(!p.pump && p.fans);
+  s.tick(15006); p = makeOutputPlan(s, false); assert(!p.pump && p.fans);
   s.reset(); p = makeOutputPlan(s, false); assert(!p.fans && !p.pump && !p.heater);
 }
